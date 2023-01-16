@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>APOD</title>
+  <style>
+    /* Add a background color and font for the entire page */
+    body {
+      background-color: #2f3136;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Center the title and give it a larger font size */
+    h1 {
+      text-align: center;
+      font-size: 3em;
+    }
+
+    /* Add a border and padding to the NASA data section */
+    #nasa-data {
+      border: 2px solid white;
+      padding: 20px;
+    }
+
+    /* Style the image and give it a rounded border */
+    #nasa-data img {
+      border-radius: 10px;
+      width: 100%;
+    }
+
+    /* Style the title and explanation text */
+    #nasa-data h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+    #nasa-data p {
+      font-size: 1.5em;
+      line-height: 1.5;
+    }
+    @media (max-width: 600px) {
+      /* Reduce the font size and spacing on small screens */
+      h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+      #nasa-data h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+      }
+      #nasa-data p {
+        font-size: 1.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Astronomy Picture of the Day</h1>
+  <div id="nasa-data"></div>
+
+  <script>
+    // Make a request to NASA's public API
+    fetch("https://api.nasa.gov/planetary/apod?api_key=i2sMkcRdWTI8Ger6CAuUPE1Psgz8QitGKQcqQgH5")
+      .then(response => response.json())
+      .then(data => {
+        // Get the NASA data and display it on the page
+        const nasaData = document.getElementById("nasa-data");
+        nasaData.innerHTML = `<h2>${data.title}</h2>
+        <img src="${data.url}" alt="${data.title}">
+        <p>${data.explanation}</p>`;
+      });
+  </script>
+</body>
+</html>
